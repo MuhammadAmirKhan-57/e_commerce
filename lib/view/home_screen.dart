@@ -5,11 +5,24 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final colors = [
-      Color(0xffF17547),
-      Color(0xff1383F1),
-      Color(0xffE6E5D9),
-    ]; 
+      final items = [
+      {
+        "color": const Color(0xffF17547),
+        "text": "20% OFF DURING THE \nWEEKEND",
+        "image": "assets/images/shopping_bag.png"
+      },
+      {
+        "color": const Color(0xff1383F1),
+        "text": "20% OFF DURING THE \nWEEKEND",
+        "image": "assets/images/shopping_bag.png"
+      },
+      {
+        "color": const Color(0xffE6E5D9),
+        "text": "20% OFF DURING THE \nWEEKEND",
+        "image": "assets/images/shopping_bag.png"
+      },
+    ];
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -63,25 +76,58 @@ class HomeScreen extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              SizedBox(height: 10),
-              SizedBox(
-                height: 130, // container height
+              SizedBox(height: 15),
+               SizedBox(
+                height: 135,
                 child: ListView.builder(
-                  itemCount: colors.length,
                   scrollDirection: Axis.horizontal,
+                  itemCount: items.length,
                   itemBuilder: (context, index) {
+                    final color = items[index]["color"] as Color;
+                    final text = items[index]["text"] as String;
+                    final image = items[index]["image"] as String;
+
                     return Container(
-                      width: 285, // container width
-                      margin: const EdgeInsets.only(right: 15), // space between
-                      decoration: BoxDecoration(
-                        color: colors[index],
-                        borderRadius: BorderRadius.circular(15),
+                      width: 285,
+                      margin: const EdgeInsets.only(right: 15),
+                      child: Stack(
+                        children: [
+                          // Background Container
+                          Container(
+                            decoration: BoxDecoration(
+                              color: color,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              text,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+
+                          // Image on right-center
+                          Positioned(
+                            right: 0,
+                            top: 5,
+                            bottom: 0,
+                            child: Image.asset(
+                              image,
+                              height: 80,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ],
                       ),
                     );
                   },
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 25),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -97,7 +143,7 @@ class HomeScreen extends StatelessWidget {
                     'See All',
                     style: TextStyle(
                       fontSize: 20,
-                      color: Color(0xff000000),
+                      color: Color(0xffF17547),
                       fontWeight: FontWeight.w600,
                     ),
                   ),
