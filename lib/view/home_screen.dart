@@ -1,28 +1,45 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-      final items = [
-      {
-        "color": const Color(0xffF17547),
-        "text": "20% OFF DURING THE \nWEEKEND",
-        "image": "assets/images/shopping_bag.png"
-      },
-      {
-        "color": const Color(0xff1383F1),
-        "text": "20% OFF DURING THE \nWEEKEND",
-        "image": "assets/images/shopping_bag.png"
-      },
-      {
-        "color": const Color(0xffE6E5D9),
-        "text": "20% OFF DURING THE \nWEEKEND",
-        "image": "assets/images/shopping_bag.png"
-      },
-    ];
+  State<HomeScreen> createState() => _HomeScreenState();
+}
 
+class _HomeScreenState extends State<HomeScreen> {
+  int selectedIndex = -1;
+
+  final items = [
+    {
+      "color": const Color(0xffF17547),
+      "text": "20% OFF DURING THE \nWEEKEND",
+      "image": "assets/images/shopping_bag.png",
+    },
+    {
+      "color": const Color(0xff1383F1),
+      "text": "20% OFF DURING THE \nWEEKEND",
+      "image": "assets/images/shopping_bag.png",
+    },
+    {
+      "color": const Color(0xffE6E5D9),
+      "text": "20% OFF DURING THE \nWEEKEND",
+      "image": "assets/images/shopping_bag.png",
+    },
+  ];
+
+
+  final categoryIcons = [
+    "assets/images/watch.png",
+    "assets/images/shoes.png",
+    "assets/images/bag.png",
+    "assets/images/t_shirt.png",
+    "assets/images/glass.png",
+  ];
+
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -77,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 15),
-               SizedBox(
+              SizedBox(
                 height: 135,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -98,7 +115,10 @@ class HomeScreen extends StatelessWidget {
                               color: color,
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 10,
+                            ),
                             alignment: Alignment.topLeft,
                             child: Text(
                               text,
@@ -148,6 +168,43 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+              SizedBox(height: 15),
+              SizedBox(
+                height: 62,
+                child: ListView.builder(
+                  itemCount: categoryIcons.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                   final isSelected = index == selectedIndex;
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedIndex = index; // select only this one
+                        });
+                      },
+                      child: Container(
+                        width: 64,
+                        margin: const EdgeInsets.only(right: 15),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: isSelected
+                              ? const Color(0xffF17547)
+                              : Colors.grey.shade300,
+                        ),
+                         child: Center(
+                          child: Image.asset(
+                            categoryIcons[index],
+                            height: 28,
+                            color: isSelected
+                                ? Colors.white
+                                : Colors.grey.shade700, // change icon color
+                            colorBlendMode: BlendMode.srcIn,
+                          ),
+                      ),
+                    ));
+                  },
+                ),
               ),
             ],
           ),
