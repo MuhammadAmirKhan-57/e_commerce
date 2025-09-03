@@ -28,7 +28,6 @@ class _HomeScreenState extends State<HomeScreen> {
     },
   ];
 
-
   final categoryIcons = [
     "assets/images/watch.png",
     "assets/images/shoes.png",
@@ -37,6 +36,26 @@ class _HomeScreenState extends State<HomeScreen> {
     "assets/images/glass.png",
   ];
 
+  final buttonItems = [
+    {
+      "color": const Color(0xffF17547),
+      "btnText": "Get Now",
+      "btnBg": Colors.white,
+      "btnTextColor": const Color(0xffF17547),
+    },
+    {
+      "color": const Color(0xff1383F1),
+      "btnText": "Get Now",
+      "btnBg": Colors.green,
+      "btnTextColor": Colors.white,
+    },
+    {
+      "color": const Color(0xffE6E5D9),
+      "btnText": "Get Now",
+      "btnBg": Colors.lightBlueAccent,
+      "btnTextColor": Colors.white,
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -129,6 +148,29 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
+                          SizedBox(height: 20),
+                          Positioned(
+                            top: 80,
+                            left: 15,
+                            child: Container(
+                              height: 34,
+                              width: 80,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(25),
+                                color: buttonItems[index]["btnBg"] as Color,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  buttonItems[index]["btnText"] as String,
+                                  style: TextStyle(
+                                    color:
+                                        buttonItems[index]["btnTextColor"] as Color,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
 
                           // Image on right-center
                           Positioned(
@@ -176,7 +218,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: categoryIcons.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                   final isSelected = index == selectedIndex;
+                    final isSelected = index == selectedIndex;
                     return GestureDetector(
                       onTap: () {
                         setState(() {
@@ -192,17 +234,17 @@ class _HomeScreenState extends State<HomeScreen> {
                               ? const Color(0xffF17547)
                               : Colors.grey.shade300,
                         ),
-                         child: Center(
+                        child: Center(
                           child: Image.asset(
                             categoryIcons[index],
                             height: 28,
                             color: isSelected
                                 ? Colors.white
                                 : Colors.grey.shade700, // change icon color
-                            colorBlendMode: BlendMode.srcIn,
                           ),
+                        ),
                       ),
-                    ));
+                    );
                   },
                 ),
               ),
