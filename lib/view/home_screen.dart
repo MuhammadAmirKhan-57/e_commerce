@@ -62,26 +62,26 @@ class _HomeScreenState extends State<HomeScreen> {
     Product(
       name: "Redmi Note 4",
       discount: '50% OFF',
-      imagePath: "assets/images/p1.png",
+      imagePath: "assets/images/p2.png",
       price: 55000,
       salePrice: 45000,
     ),
     Product(
       name: "Apple Watch - series 6",
       discount: '50% OFF',
-      imagePath: "assets/images/p2.png",
+      imagePath: "assets/images/p1.png",
       price: 55000,
       salePrice: 45000,
     ),
     Product(
-      name: "Shoes",
+      name: "Rolex",
       discount: '50% OFF',
       imagePath: "assets/images/p3.png",
       price: 55000,
       salePrice: 45000,
     ),
     Product(
-      name: "Watch",
+      name: "Casio",
       discount: '50% OFF',
       imagePath: "assets/images/p4.png",
       price: 55000,
@@ -292,7 +292,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisSpacing: 8,
                     childAspectRatio: 0.8,
                   ),
-                  itemCount: 6,
+                  itemCount: 4,
                   itemBuilder: (context, i) {
                     return Container(
                       decoration: BoxDecoration(
@@ -305,6 +305,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           vertical: 10,
                         ),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -322,7 +323,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       style: TextStyle(
                                         fontSize: 11,
                                         color: Color(0xff000000),
-                                        fontWeight: FontWeight.bold,
+                                        fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                   ),
@@ -338,9 +339,52 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   ),
                                   child: Center(
-                                    child: Icon(Icons.favorite_border,
-                                    size: 20,
-                                    color: Colors.grey,),
+                                    child: Icon(
+                                      Icons.favorite_border,
+                                      size: 20,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 5),
+                            Center(
+                              child: Image.asset(
+                                products[i].imagePath,
+                                width: 190,
+                                height: 105,
+                              ),
+                            ),
+                            SizedBox(height: 5),
+                            Text(
+                              products[i].name,
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Color(0xff000000),
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            SizedBox(height: 5),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Rs ${products[i].salePrice}",
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w800,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                const SizedBox(width: 6),
+                                Text(
+                                  "Rs ${products[i].price}",
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.w700,
+                                    decoration: TextDecoration.lineThrough,
                                   ),
                                 ),
                               ],
