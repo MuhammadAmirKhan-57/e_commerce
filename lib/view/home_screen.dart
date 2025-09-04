@@ -1,3 +1,4 @@
+import 'package:e_commerce/model/product_model.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -55,6 +56,37 @@ class _HomeScreenState extends State<HomeScreen> {
       "btnBg": Colors.lightBlueAccent,
       "btnTextColor": Colors.white,
     },
+  ];
+
+  final List<Product> products = [
+    Product(
+      name: "Redmi Note 4",
+      discount: '50% OFF',
+      imagePath: "assets/images/p1.png",
+      price: 55000,
+      salePrice: 45000,
+    ),
+    Product(
+      name: "Apple Watch - series 6",
+      discount: '50% OFF',
+      imagePath: "assets/images/p2.png",
+      price: 55000,
+      salePrice: 45000,
+    ),
+    Product(
+      name: "Shoes",
+      discount: '50% OFF',
+      imagePath: "assets/images/p3.png",
+      price: 55000,
+      salePrice: 45000,
+    ),
+    Product(
+      name: "Watch",
+      discount: '50% OFF',
+      imagePath: "assets/images/p4.png",
+      price: 55000,
+      salePrice: 45000,
+    ),
   ];
 
   @override
@@ -164,7 +196,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   buttonItems[index]["btnText"] as String,
                                   style: TextStyle(
                                     color:
-                                        buttonItems[index]["btnTextColor"] as Color,
+                                        buttonItems[index]["btnTextColor"]
+                                            as Color,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -189,7 +222,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
               ),
-              SizedBox(height: 25),
+              SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -242,6 +275,77 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ? Colors.white
                                 : Colors.grey.shade700, // change icon color
                           ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 20),
+              SizedBox(
+                height: 280,
+                child: GridView.builder(
+                  physics: BouncingScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 8,
+                    childAspectRatio: 0.8,
+                  ),
+                  itemCount: 6,
+                  itemBuilder: (context, i) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Color(0xffCFCFCF),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsetsGeometry.symmetric(
+                          horizontal: 8,
+                          vertical: 10,
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  width: 60,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      products[i].discount,
+                                      style: TextStyle(
+                                        fontSize: 11,
+                                        color: Color(0xff000000),
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  width: 30,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: Colors.grey,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Icon(Icons.favorite_border,
+                                    size: 20,
+                                    color: Colors.grey,),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                     );
