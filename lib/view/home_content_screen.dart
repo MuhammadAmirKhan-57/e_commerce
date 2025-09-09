@@ -1,4 +1,5 @@
 import 'package:e_commerce/model/product_model.dart';
+import 'package:e_commerce/view/product_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeContentScreen extends StatefulWidget {
@@ -89,6 +90,13 @@ class _HomeContentScreenState extends State<HomeContentScreen> {
     ),
   ];
 
+    late List<bool> favoriteStates;
+
+  @override
+  void initState() {
+    super.initState();
+    favoriteStates = List.generate(products.length, (index) => false);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -291,104 +299,107 @@ class _HomeContentScreenState extends State<HomeContentScreen> {
                     crossAxisSpacing: 8,
                     childAspectRatio: 0.8,
                   ),
-                  itemCount: 4,
+                  itemCount: products.length,
                   itemBuilder: (context, i) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: Color(0xffCFCFCF),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsetsGeometry.symmetric(
-                          horizontal: 8,
-                          vertical: 10,
+                    return GestureDetector(
+                      onTap : () => Navigator.push(context, MaterialPageRoute(builder: (context)=> ProductDetailsScreen(product: products[i]))),                       
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xffCFCFCF),
+                          borderRadius: BorderRadius.circular(15),
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  width: 60,
-                                  height: 30,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      products[i].discount,
-                                      style: TextStyle(
-                                        fontSize: 11,
-                                        color: Color(0xff000000),
-                                        fontWeight: FontWeight.w600,
+                        child: Padding(
+                          padding: EdgeInsetsGeometry.symmetric(
+                            horizontal: 8,
+                            vertical: 10,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    width: 60,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        products[i].discount,
+                                        style: TextStyle(
+                                          fontSize: 11,
+                                          color: Color(0xff000000),
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Container(
-                                  width: 30,
-                                  height: 30,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color: Colors.grey,
-                                      width: 2,
+                                  Container(
+                                    width: 30,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: Colors.grey,
+                                        width: 2,
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.favorite_border,
+                                        size: 20,
+                                        color: Colors.grey,
+                                      ),
                                     ),
                                   ),
-                                  child: Center(
-                                    child: Icon(
-                                      Icons.favorite_border,
-                                      size: 20,
-                                      color: Colors.grey,
+                                ],
+                              ),
+                              SizedBox(height: 5),
+                              Center(
+                                child: Image.asset(
+                                  products[i].imagePath,
+                                  width: 190,
+                                  height: 105,
+                                ),
+                              ),
+                              SizedBox(height: 5),
+                              Text(
+                                products[i].name,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Color(0xff000000),
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              SizedBox(height: 5),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Rs ${products[i].salePrice}",
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w800,
+                                      color: Colors.black,
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 5),
-                            Center(
-                              child: Image.asset(
-                                products[i].imagePath,
-                                width: 190,
-                                height: 105,
-                              ),
-                            ),
-                            SizedBox(height: 5),
-                            Text(
-                              products[i].name,
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Color(0xff000000),
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            SizedBox(height: 5),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Rs ${products[i].salePrice}",
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w800,
-                                    color: Colors.black,
+                                  const SizedBox(width: 6),
+                                  Text(
+                                    "Rs ${products[i].price}",
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.grey,
+                                      fontWeight: FontWeight.w700,
+                                      decoration: TextDecoration.lineThrough,
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(width: 6),
-                                Text(
-                                  "Rs ${products[i].price}",
-                                  style: const TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.w700,
-                                    decoration: TextDecoration.lineThrough,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     );
