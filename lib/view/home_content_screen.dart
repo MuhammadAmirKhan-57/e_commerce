@@ -282,8 +282,7 @@ class _HomeContentScreenState extends State<HomeContentScreen> {
                 ),
               ),
               SizedBox(height: 20),
-              SizedBox(
-                height: 280,
+              Expanded(
                 child: GridView.builder(
                   physics: BouncingScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

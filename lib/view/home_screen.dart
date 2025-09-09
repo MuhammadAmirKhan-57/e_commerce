@@ -4,8 +4,6 @@ import 'package:e_commerce/view/cart_screen.dart';
 import 'package:e_commerce/view/profile_screen.dart';
 import 'package:e_commerce/view/favorite_screen.dart';
 
-
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -17,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int selectBottomIndex = 0;
 
   late final List<Widget> screenList = [
-    const HomeContentScreen(), 
+    const HomeContentScreen(),
     const FavoriteScreen(),
     const CartScreen(),
     const ProfileScreen(),
@@ -29,17 +27,25 @@ class _HomeScreenState extends State<HomeScreen> {
       body: screenList[selectBottomIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectBottomIndex,
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.white,
+        selectedItemColor: const Color(0xffF17547),
+        unselectedItemColor: Colors.grey,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
         onTap: (index) {
           setState(() {
             selectBottomIndex = index;
           });
         },
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorite'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite_border), label: ''),
           BottomNavigationBarItem(
-              icon: Icon(Icons.production_quantity_limits), label: 'Cart'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+            icon: Icon(Icons.production_quantity_limits),
+            label: '',
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
         ],
       ),
     );
