@@ -1,4 +1,6 @@
 import 'package:e_commerce/model/product_model.dart';
+import 'package:e_commerce/view/cart_screen.dart';
+import 'package:e_commerce/view/detail_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -10,6 +12,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = -1;
+  int selectBottomUndex = 0;
+
+  List<Widget> screenList = [
+    HomeScreen(),
+    DetailScreen(),
+    CartScreen(),
+  ];
+
 
   final items = [
     {
